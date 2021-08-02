@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout, getUserDetails } from '../actions/userActions';
+import { useHistory } from 'react-router';
 
-const Header = () => {
+const Header = ({ History }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-
+  let history = useHistory();
   const logoutHandler = () => {
     dispatch(logout());
+    history.push('/login');
   };
 
   const profileHandler = () => {
@@ -56,7 +58,7 @@ const Header = () => {
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to='/admin/prodcutlist'>
+                  <LinkContainer to='/admin/productlist'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to='/admin/orderlist'>
